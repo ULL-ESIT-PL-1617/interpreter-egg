@@ -1,9 +1,4 @@
 // A simple language named Egg
-// 一切都是表达式
-// 表达式可能包含表达式
-// 数字、字符串类型是值，值是对应的值
-// 词是另一种类型，有一个名字
-// 应用是一种特殊的值，包括操作符表达式、参数表达式列表
 // parseExpression(program)
 // {
 //  expr: expr,
@@ -34,24 +29,24 @@ function parseExpression(program) {
 
 function parseApply(expr, program) {
   //console.log("parseApply: " + program);
-  program = skipSpace(program);  // 如果(后面有空格
+  program = skipSpace(program);  
   expr = {type: "apply", operator: expr, args: []};
-  while (program.slice(0, 1) != ")") { // 如果用program[0]program不一定存在
+  while (program.slice(0, 1) != ")") { 
     //console.log("apply argument: " + program);
     var arg = parseExpression(program);
     expr.args.push(arg.expr);
     program = skipSpace(arg.rest);
     if (program.slice(0, 1) == ",") {
       program = skipSpace(program.slice(1));
-      // 这种情况只是`a(b, )`，我不想支持这种情况
+      
       if (program.slice(0, 1) == ")") {
         throw new SyntaxError("Not valid Egg expression!")
       }
     } else if (program.slice(0, 1) != ')'){
-      throw new SyntaxError("Egg expect ',' or ')'"); // 因为a(a b)如果没有这个条件会当两个参数
+      throw new SyntaxError("Egg expect ',' or ')'"); 
     }
   }
-  program = program.slice(1); //移除)
+  program = program.slice(1); 
   program = skipSpace(program);
   if (program.slice(0, 1) == '(') {
     return parseApply(expr, program.slice(1));

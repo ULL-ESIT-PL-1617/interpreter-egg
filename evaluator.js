@@ -1,7 +1,3 @@
-/*
- * 求值器
- * 内置关键字
- */
 function evaluate(expr, env) {
   switch(expr.type) {
     case "value":
@@ -24,7 +20,7 @@ function evaluate(expr, env) {
       }
       return op.apply(null, expr.args.map(function(arg){
         return evaluate(arg, env);
-      })); // 这里expr.args里还是表达式树。运行前要先求值。
+      })); 
   }
 }
 
@@ -49,7 +45,6 @@ specialForms["while"] = function(args, env) {
   while (evaluate(args[0], env) !== false) {
     evaluate(args[1], env);
   }
-  // Egg 语言中没有undefined
   return false;
 };
 

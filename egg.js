@@ -20,7 +20,7 @@ function run() {
   var stack = 0;
   var inString = false;
   rl.on('line', function(line) {
-    // 检查状态
+    
     for (var i = 0; i < line.length; i++) {
       switch (line[i]) {
         case '"':
@@ -40,9 +40,9 @@ function run() {
           break
       }
     }
-    // 用readline获取的换行符没了。。。换成readline
+    
     line = line + '\n';
-    // 搜集程序文本
+    
     program += line;
     if (stack <= 0) {
       try {
@@ -65,7 +65,7 @@ function run() {
   function completer(line) {
     //console.log(allProperties(env));
     var word = line.split(/[\s(),"]+/).slice(-1)[0];
-    // 用于拼接在匹配部分之前
+    
     line = line.slice(-word.length);
     //console.log(line);
     //console.log(word);

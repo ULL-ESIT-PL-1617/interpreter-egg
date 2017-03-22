@@ -1,6 +1,3 @@
-/*
- * 环境和内置函数
- */
 var topEnv = Object.create(null);
 
 topEnv['true'] = true;
@@ -10,7 +7,7 @@ topEnv['false'] = false;
   topEnv[op] = new Function("a", "b", "return a " + op + " b;");
 });
 
-// print函数
+
 topEnv["print"] = function() {
   console.log.apply(null, arguments);
   return true;
